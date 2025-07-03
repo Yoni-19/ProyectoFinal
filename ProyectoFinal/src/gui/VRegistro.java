@@ -92,24 +92,26 @@ public class VRegistro extends JFrame implements ActionListener {
 	}
 	UsuarioBD usuarioBD = new UsuarioBD();
 	
-	ArregloUsuarios usuarios = new ArregloUsuarios();
+	private int intentosFallidos = 0;
 	
 	private JButton btnRegistrarse;
 	
 	protected void do_btnIniciarSesión_actionPerformed(ActionEvent e) {
-		String u = txtUsuario.getText().trim();
-	    String c = txtContraseña.getText().trim();
+		String usuario = txtUsuario.getText().toUpperCase().trim();
+	    String clave = new String(txtContraseña.getText()).toUpperCase().trim();
 
-	    if (u.isEmpty() || c.isEmpty()) {
-	        JOptionPane.showMessageDialog(this, "Ingrese usuario y contraseña.");
+	    if (usuario.isEmpty() || clave.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Ingrese usuario y contraseña.");
 	        return;
 	    }
 
-	    if (usuarioBD.verificarUsuario(u, c)) {
-	    	VProducto ventana = new VProducto();
-	        ventana.setVisible(true);
+	    boolean acceso = usuarioBD.verificarUsuario(usuario, clave);
 
-	        // Accedemos directamente a los TextArea de VProducto
+	    if (acceso) {
+	        JOptionPane.showMessageDialog(null, "Inicio de sesión exitoso.");
+	        VProducto ventana = new VProducto();
+	        ventana.setVisible(true);
+	     // Accedemos directamente a los TextArea de VProducto
 	        ProductoBD productoBD = new ProductoBD();
 	        ProveedorBD proveedorBD = new ProveedorBD();
 	        ClienteBD clienteBD = new ClienteBD();
@@ -117,8 +119,15 @@ public class VRegistro extends JFrame implements ActionListener {
 	        ventana.txtS.setText(productoBD.listarProductos());
 	        ventana.txtS2.setText(clienteBD.listarClientes());
 	        ventana.txtS3.setText(proveedorBD.listarProveedores());
+	        this.dispose();  // cerrar la ventana de login
+	    } else {
+	        intentosFallidos++;
+	        JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos. Intento " + intentosFallidos + " de 3");
 
-	        dispose();
+	        if (intentosFallidos >= 3) {
+	            JOptionPane.showMessageDialog(null, "Demasiados intentos fallidos. El programa se cerrará.");
+	            System.exit(0); // cerrar la aplicación
+	        }
 	    }
 	}
 	protected void do_btnRegistrarse_actionPerformed(ActionEvent e) {
