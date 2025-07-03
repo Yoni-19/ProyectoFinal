@@ -129,7 +129,7 @@ public class VProducto extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_4 = new JLabel("Menú principal");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel_4.setBounds(21, 11, 216, 43);
+		lblNewLabel_4.setBounds(333, 11, 216, 43);
 		contentPane.add(lblNewLabel_4);
 		
 		realizarEncargo = new JButton("Realizar Encargo");
@@ -195,6 +195,18 @@ public class VProducto extends JFrame implements ActionListener {
 		lblNewLabel_5_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_5_3.setBounds(31, 386, 193, 25);
 		contentPane.add(lblNewLabel_5_3);
+		
+		JButton btnNewButton_1 = new JButton("Registro de ventas");
+		btnNewButton_1.setBounds(49, 29, 164, 23);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Modificar cliente");
+		btnNewButton_2.setBounds(849, 127, 137, 23);
+		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Modificar Proveedor");
+		btnNewButton_3.setBounds(870, 455, 142, 23);
+		contentPane.add(btnNewButton_3);
 		
 		
 	}
