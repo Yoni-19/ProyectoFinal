@@ -196,7 +196,8 @@ public class VProducto extends JFrame implements ActionListener {
 		lblNewLabel_5_3.setBounds(31, 386, 193, 25);
 		contentPane.add(lblNewLabel_5_3);
 		
-		JButton btnNewButton_1 = new JButton("Registro de ventas");
+		btnNewButton_1 = new JButton("Registro de ventas");
+		btnNewButton_1.addActionListener(this);
 		btnNewButton_1.setBounds(49, 29, 164, 23);
 		contentPane.add(btnNewButton_1);
 		
@@ -225,7 +226,11 @@ public class VProducto extends JFrame implements ActionListener {
 	private JButton btnRegistrar_Proveedor;
 	private JButton btnEliminar_Proveedor;
 	private JButton btnNewButton;
+	private JButton btnNewButton_1;
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton_1) {
+			do_btnNewButton_1_actionPerformed(e);
+		}
 		if (e.getSource() == btnNewButton) {
 			do_btnNewButton_actionPerformed(e);
 		}
@@ -585,6 +590,10 @@ public class VProducto extends JFrame implements ActionListener {
 		} catch (NumberFormatException ex) {
 		    JOptionPane.showMessageDialog(null, "Cantidad inválida.");
 		}
+	}
+	protected void do_btnNewButton_1_actionPerformed(ActionEvent e) {
+		VRegistroVentas Ventas = new VRegistroVentas();
+        Ventas.setVisible(true);
 	}
 }
 
